@@ -16,5 +16,13 @@ namespace Politeh_Parser
         {
             InitializeComponent();
         }
+
+        private void LoadFileButton_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+            LoadFileText.Text = openFileDialog1.FileName;
+            }
+        }
     }
 }
