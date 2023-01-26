@@ -8,5 +8,6 @@ namespace Politeh_Parser.Classes
 {
     internal class ParseExcel
     {
+
     }
 }

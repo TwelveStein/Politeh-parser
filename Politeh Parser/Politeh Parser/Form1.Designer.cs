@@ -35,7 +35,7 @@
             // 
             // LoadFileButton
             // 
-            this.LoadFileButton.Location = new System.Drawing.Point(51, 79);
+            this.LoadFileButton.Location = new System.Drawing.Point(12, 12);
             this.LoadFileButton.Name = "LoadFileButton";
             this.LoadFileButton.Size = new System.Drawing.Size(151, 23);
             this.LoadFileButton.TabIndex = 0;
@@ -46,11 +46,10 @@
             // LoadFileText
             // 
             this.LoadFileText.AutoSize = true;
-            this.LoadFileText.Location = new System.Drawing.Point(48, 117);
+            this.LoadFileText.Location = new System.Drawing.Point(12, 38);
             this.LoadFileText.Name = "LoadFileText";
-            this.LoadFileText.Size = new System.Drawing.Size(35, 13);
+            this.LoadFileText.Size = new System.Drawing.Size(0, 13);
             this.LoadFileText.TabIndex = 1;
-            this.LoadFileText.Text = "label1";
             // 
             // openFileDialog1
             // 
