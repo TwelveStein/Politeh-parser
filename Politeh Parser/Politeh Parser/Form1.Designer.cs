@@ -31,11 +31,12 @@
             this.LoadFileButton = new System.Windows.Forms.Button();
             this.LoadFileText = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.File_Name_in_Form = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoadFileButton
             // 
-            this.LoadFileButton.Location = new System.Drawing.Point(12, 12);
+            this.LoadFileButton.Location = new System.Drawing.Point(31, 38);
             this.LoadFileButton.Name = "LoadFileButton";
             this.LoadFileButton.Size = new System.Drawing.Size(151, 23);
             this.LoadFileButton.TabIndex = 0;
@@ -55,11 +56,21 @@
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
             // 
+            // File_Name_in_Form
+            // 
+            this.File_Name_in_Form.AutoSize = true;
+            this.File_Name_in_Form.Location = new System.Drawing.Point(28, 22);
+            this.File_Name_in_Form.Name = "File_Name_in_Form";
+            this.File_Name_in_Form.Size = new System.Drawing.Size(35, 13);
+            this.File_Name_in_Form.TabIndex = 2;
+            this.File_Name_in_Form.Text = "label1";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.File_Name_in_Form);
             this.Controls.Add(this.LoadFileText);
             this.Controls.Add(this.LoadFileButton);
             this.Name = "Form1";
@@ -74,6 +85,7 @@
         private System.Windows.Forms.Button LoadFileButton;
         private System.Windows.Forms.Label LoadFileText;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.Label File_Name_in_Form;
     }
 }
 
