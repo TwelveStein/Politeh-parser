@@ -24,6 +24,7 @@ namespace Politeh_Parser
 
         private void LoadFileButton_Click(object sender, EventArgs e)
         {
+            int d = 10;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 var File_Excel = openFileDialog1.FileName;
