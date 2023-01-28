@@ -8,5 +8,7 @@ namespace Politeh_Parser.Classes
 {
     internal class JsonBuild
     {
+
+
     }
 }
