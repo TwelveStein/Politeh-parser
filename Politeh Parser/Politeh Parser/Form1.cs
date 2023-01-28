@@ -28,7 +28,7 @@ namespace Politeh_Parser
             {
                 var File_Excel = openFileDialog1.FileName;
                 File_Name_in_Form.Text = File_Excel;
-                if (File_Excel.Contains(".xls") || File_Excel.Contains(".xlsx"))
+                if (File_Excel.Contains(".xlsx"))
                     Classes.ParseExcel.Load_excel_file(File_Excel);
                 else 
                 {
