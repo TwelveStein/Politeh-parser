@@ -36,7 +36,7 @@
             // 
             // LoadFileButton
             // 
-            this.LoadFileButton.Location = new System.Drawing.Point(31, 38);
+            this.LoadFileButton.Location = new System.Drawing.Point(31, 47);
             this.LoadFileButton.Name = "LoadFileButton";
             this.LoadFileButton.Size = new System.Drawing.Size(151, 23);
             this.LoadFileButton.TabIndex = 0;
