@@ -11,32 +11,41 @@ namespace Politeh_Parser.Classes
         {
             try
             {
-                //Pass the filepath and filename to the StreamWriter Constructor
-                StreamWriter sw = new StreamWriter("test.txt");
-                sw.WriteLine(
-                    group.Group_name+"\n"+
-                    group.Class_houre + "\n" +
-                    group.First_para+ "\n" +
-                    group.Second_para + "\n" +
-                    group.Third_para+ "\n" +
-                    group.Fourth_para + "\n" +
-                    group.Fifth_para + "\n" +
-                    group.Count_par + "\n" );
                 
-                sw.Close();
+                //Pass the filepath and filename to the StreamWriter Constructor
+                using (StreamWriter sw = File.AppendText("test.txt"))
+                {
+                    sw.WriteLine(
+                    group.Group_name + "\n\n" +
+                    group.Class_houre + "\n\n" +
+                    group.First_para + "\n\n" +
+                    group.Second_para + "\n\n" +
+                    group.Third_para + "\n\n" +
+                    group.Fourth_para + "\n\n" +
+                    group.Fifth_para + "\n\n" +
+                    group.Count_par + "\n\n\n\n"
+                    );
+                }
+                
             }
             catch 
             {
-            
+                
             }
+        }
+        public static void json_cleaner() 
+        {
+            StreamWriter stream = new StreamWriter("test.txt");
+            stream.WriteLine("");
+            stream.Close();
         }
         public static void New_Day(string day) 
         {
-            StreamWriter sw = new StreamWriter("test.txt");
-            sw.WriteLine($"\n\n {day} \n\n");
-            sw.Close();
+            using (StreamWriter sw = File.AppendText("test.txt"))
+            {
+                sw.WriteLine($"\n______________\n {day} \n______________\n");
+            }
         }
-
 
     }
 }
