@@ -11,32 +11,76 @@ namespace Politeh_Parser.Classes
         public static void Load_excel_file(string file) 
         {
 
+            Group group = new Group
+            (
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                 0
+            );
+             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+             
+             string[] massive_days = new string[] { "пн", "вт", "ср", "чт", "пт" };
+             foreach (string day in massive_days)
+             {
+                 JsonBuild.New_Day(day);
+                 if (day == "пн"){
+                     Monday_processing(group,file);
+                 }
+                 else 
+                 {
+                     Other_days_processing(group,day,file);
+                 }
+             }
+             
+            
+        }
+
+        private static Group Monday_processing(Group group, string file) 
+        {
             using (var package = new ExcelPackage(new FileInfo(file)))
             {
-                ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+                string text_from_the_cell = "";
+                int counter = 0;
                 var ws = package.Workbook.Worksheets["пн"];
-                //MessageBox.Show(ws.Cells[4, 2].Value.ToString());
-                int stroka = 3;
-                Group group = new Group
-                    (
-                        ws.Cells[stroka, 2].Value.ToString(),
-                        ws.Cells[stroka+1, 2].Value.ToString(),
-                        ws.Cells[stroka+2, 2].Value.ToString(),
-                        ws.Cells[stroka+3, 2].Value.ToString(),
-                        ws.Cells[stroka+4, 2].Value.ToString(),
-                        ws.Cells[stroka+5, 2].Value.ToString(),
-                        ws.Cells[stroka+6, 2].Value.ToString(),
-                        5
-
-                    );
-                JsonBuild.JsonBuilder(group);
-    
-                    
-
-                    
-               
+                for (int i = 2; i < 13; i++) 
+                {
+                    for (int j = 3; j < 30; j++) 
+                    {
+                        if (ws.Cells[j, i].Value == null) 
+                        {
+                            
+                        }
+                    }
+                }
+                return group;
             }
         }
+        private static Group Other_days_processing(Group group,string day, string file)
+        {
+            using (var package = new ExcelPackage(new FileInfo(file)))
+            {
+                string text_from_the_cell = "";
+                int counter = 0;
+                var ws = package.Workbook.Worksheets[day];
+                for (int i = 2; i < 13; i++)
+                {
+                    for (int j = 3; j < 30; j++)
+                    {
+                        if (ws.Cells[j, i].Value == null)
+                        {
+
+                        }
+                    }
+                }
+                return group;
+            }
+        }
+        
     }
     public class Group
     {

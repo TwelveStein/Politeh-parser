@@ -28,6 +28,13 @@ namespace Politeh_Parser.Classes
             
             }
         }
+        public static void New_Day(string day) 
+        {
+            StreamWriter sw = new StreamWriter("test.txt");
+            sw.WriteLine($"\n\n {day} \n\n");
+            sw.Close();
+        }
+
 
     }
 }
