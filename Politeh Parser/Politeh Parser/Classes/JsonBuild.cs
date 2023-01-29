@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 
 namespace Politeh_Parser.Classes
