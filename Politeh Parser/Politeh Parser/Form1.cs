@@ -32,7 +32,7 @@ namespace Politeh_Parser
                     Classes.ParseExcel.Load_excel_file(File_Excel);
                 else 
                 {
-                    MessageBox.Show("Error type of File . Type excel only");
+                    MessageBox.Show("Error type of File. Choose excel only");
                 }
             }
         }
