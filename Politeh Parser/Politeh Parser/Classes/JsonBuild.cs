@@ -65,7 +65,7 @@ namespace Politeh_Parser.Classes
                 string room;
                 string a = nomer_pari;
                 a = a.Replace('\n', ' ');
-                var b = a.Split(' ', StringSplitOptions.RemoveEmptyEntries).ToList();
+                var b = a.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
                 b.Reverse();
                 room = b[0]; prepod = b[1];
                 b.Reverse();
