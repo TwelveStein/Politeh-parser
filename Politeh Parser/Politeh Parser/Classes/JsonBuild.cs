@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Windows.Forms;
 using Newtonsoft.Json;
 
 
@@ -12,7 +13,9 @@ namespace Politeh_Parser.Classes
 {
     internal class JsonBuild
     {
-        private List<Days> days;
+        public static string den_nedeli;
+        private static List<Lessons> list = new List<Lessons>();
+        private static List<Days> days = new List<Days>();
         public static void JsonBuilder(Group group) 
         {
             try
@@ -24,14 +27,10 @@ namespace Politeh_Parser.Classes
                               group.Third_para,
                               group.Fourth_para,
                               group.Fifth_para);
-                List<Lessons> lessons = new List<Lessons>() {};
-
-
-
-
-                // сохранение данных
-                //var Raspisanie = JsonConvert.SerializeObject(RaspisanieFull);
-                //File.WriteAllText("E:\\GitHub\\Politeh-parser\\Politeh Parser\\Politeh Parser\\JsonFiles\\\\Raspisanie.json", Raspisanie);
+                Days day = new Days(den_nedeli, list);
+                days.Add(day);
+                var Raspisanie = JsonConvert.SerializeObject(days);
+                File.WriteAllText($"E:\\GitHub\\Politeh-parser\\Politeh Parser\\Politeh Parser\\JsonFile\\\\Raspisanie.json", Raspisanie);
             }
             catch
             {
@@ -58,7 +57,8 @@ namespace Politeh_Parser.Classes
                 fourth_para,
                 fifth_para
             };
-            foreach(string nomer_pari in massive)
+            
+            foreach (string nomer_pari in massive)
             {
                 string para;
                 string prepod;
@@ -72,6 +72,12 @@ namespace Politeh_Parser.Classes
                 b.RemoveAt(b.Count - 1);
                 b.RemoveAt(b.Count - 1);
                 para = string.Join(" ", b.ToArray());
+
+                Lessons lessons = new Lessons(para, room, prepod);
+                
+                list.Add(lessons);
+
+
             }
         }
 
@@ -79,8 +85,15 @@ namespace Politeh_Parser.Classes
 
         public class Days
         {
+
             public string day_name { get; private set; }
             public List<Lessons> lessons { get; private set; }
+
+            public Days(string day_name, List<Lessons> lessons)
+            {
+                this.day_name = day_name;
+                this.lessons = lessons;
+            }
         }
 
         public class Lessons
@@ -96,21 +109,27 @@ namespace Politeh_Parser.Classes
             }
         }
 
-
-
-
-
-
-
-
-
-
-
         public static void New_Day(string day) 
         {
-            using (StreamWriter sw = File.AppendText("test.txt"))
+            switch (day) 
             {
-                sw.WriteLine($"\n______________\n {day} \n______________\n");
+                case "пн":
+                    den_nedeli = "Понедельник";
+                    break;
+                case "вт":
+                    den_nedeli = "Вторник";
+                    break;
+                case "ср":
+                    den_nedeli = "Среда";
+                    break;
+                case "чт":
+                    den_nedeli = "Четверг";
+                    break;
+                case "пт":
+                    den_nedeli = "Пятница";
+                    MessageBox.Show("Пятница");
+                    break;
+
             }
         }
 
