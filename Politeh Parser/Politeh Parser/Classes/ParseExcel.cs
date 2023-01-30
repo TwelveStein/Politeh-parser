@@ -1,5 +1,6 @@
 ﻿using OfficeOpenXml;
 using System.IO;
+using System.Windows.Forms;
 
 //using Microsoft.Office.Interop.Excel;
 //using _Excel = Microsoft.Office.Interop.Excel;
@@ -24,63 +25,132 @@ namespace Politeh_Parser.Classes
             );
              ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
              
-             string[] massive_days = new string[] { "пн", "вт", "ср", "чт", "пт" };
+             string[] massive_days = new string[] { "пн", "вт", "ср", "чт", "пт" };;
              foreach (string day in massive_days)
              {
                  JsonBuild.New_Day(day);
-                 if (day == "пн"){
-                     Monday_processing(group,file);
-                 }
-                 else 
-                 {
-                     Other_days_processing(group,day,file);
-                 }
+                 Days_processing(group, file, day);
+                 
              }
              
             
         }
 
-        private static Group Monday_processing(Group group, string file) 
+        private static void Days_processing(Group group, string file,string day) 
         {
             using (var package = new ExcelPackage(new FileInfo(file)))
             {
-                string text_from_the_cell = "";
-                int counter = 0;
-                var ws = package.Workbook.Worksheets["пн"];
-                for (int i = 2; i < 13; i++) 
+                int Num1, Num2 ,Num3,max_count_pars;
+                if (day == "пн")
                 {
-                    for (int j = 3; j < 30; j++) 
-                    {
-                        if (ws.Cells[j, i].Value == null) 
-                        {
-                            
-                        }
-                    }
+                    Num1 = 2; Num2 = 13; Num3 = 30; max_count_pars = 7;
                 }
-                return group;
-            }
-        }
-        private static Group Other_days_processing(Group group,string day, string file)
-        {
-            using (var package = new ExcelPackage(new FileInfo(file)))
-            {
+                else 
+                {
+                    Num1 = 1; Num2 = 12; Num3 = 26;max_count_pars = 6;
+                }
                 string text_from_the_cell = "";
                 int counter = 0;
                 var ws = package.Workbook.Worksheets[day];
-                for (int i = 2; i < 13; i++)
+   
+                for (int i = Num1; i < Num2; i++) 
                 {
-                    for (int j = 3; j < 30; j++)
+                    for (int j = 3; j <= Num3; j++) 
                     {
-                        if (ws.Cells[j, i].Value == null)
+                        if (ws.Cells[j, i].Value != null) 
                         {
+                            if (ws.Cells[j, i].Value.ToString().Length > 2)
+                            {
+                                if(counter !=0)
+                                    group.Count_par++;
+                                text_from_the_cell = ws.Cells[j, i].Value.ToString();
+                            }
+                            else 
+                            {
+                                text_from_the_cell = "None";
+                            }
 
+                        }
+                        else
+                        {
+                            text_from_the_cell = "None";
+                        }
+
+                        if (day == "пн")
+                        {
+                            group = Monday(group, counter, text_from_the_cell);
+                        }
+                        else 
+                        {
+                            group = Other_day(group, counter, text_from_the_cell);
+                        }
+                        counter++;
+                        if (counter == max_count_pars) 
+                        {
+                            JsonBuild.JsonBuilder(group);
+                            group.Count_par = 0;
+                            counter = 0;
                         }
                     }
                 }
-                return group;
+                
             }
         }
-        
+        private static Group Monday(Group group,int couter,string text) 
+        {
+            switch (couter) 
+            {
+                case 0:
+                    group.Group_name = text;
+                    break;
+                case 1:
+                    group.Class_houre = text;
+                    break;
+                case 2:
+                    group.First_para = text;
+                    break;
+                case 3:
+                    group.Second_para = text;
+                    break;
+                case 4:
+                    group.Third_para = text;
+                    break;
+                case 5:
+                    group.Fourth_para = text;
+                    break;
+                case 6:
+                    group.Fifth_para = text;
+                    break;
+            }
+            return group;
+        }
+        private static Group Other_day(Group group, int couter, string text)
+        {
+            switch (couter)
+            {
+                case 0:
+                    group.Group_name = text;
+                    break;
+                case 1:
+                    group.First_para = text;
+                    group.Class_houre = "";
+                    break;
+                case 2:
+                    group.Second_para = text;
+                    break;
+                case 3:
+                    group.Third_para = text;
+                    break;
+                case 4:
+                    group.Fourth_para = text;
+                    break;
+                case 5:
+                    group.Fifth_para = text;
+                    break;
+            }
+            return group;
+        }
+
     }
     public class Group
     {

@@ -17,6 +17,7 @@ namespace Politeh_Parser.Classes
         {
             try
             {
+
                 FormatingData(group.Class_houre,
                               group.First_para,
                               group.Second_para,
@@ -104,13 +105,14 @@ namespace Politeh_Parser.Classes
 
 
 
+
         public static void New_Day(string day) 
         {
-            StreamWriter sw = new StreamWriter("test.txt");
-            sw.WriteLine($"\n\n {day} \n\n");
-            sw.Close();
+            using (StreamWriter sw = File.AppendText("test.txt"))
+            {
+                sw.WriteLine($"\n______________\n {day} \n______________\n");
+            }
         }
-
 
     }
 }
