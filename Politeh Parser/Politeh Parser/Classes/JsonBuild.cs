@@ -11,6 +11,7 @@ namespace Politeh_Parser.Classes
     internal class JsonBuild
     {
         public static string den_nedeli;
+        private static int dayindex = 0;
         private static List<Lessons> list = new List<Lessons>();
         private static List<Days> days = new List<Days>();
         public static void JsonBuilder(Group group) 
@@ -24,7 +25,8 @@ namespace Politeh_Parser.Classes
                               group.Third_para,
                               group.Fourth_para,
                               group.Fifth_para);
-                Days day = new Days(den_nedeli, list);
+                Days day = new Days(New_Day_nedeli(dayindex%5), list);
+                dayindex++;
                 days.Add(day);
                 var Raspisanie = JsonConvert.SerializeObject(days);
                 File.WriteAllText($"E:\\GitHub\\Politeh-parser\\Politeh Parser\\Politeh Parser\\JsonFile\\\\Raspisanie.json", Raspisanie);
@@ -106,12 +108,33 @@ namespace Politeh_Parser.Classes
             }
         }
 
-        public static void New_Day(string day) 
+        public static string New_Day_nedeli(int day)
+        {
+            switch (day)
+            {
+                case 0:
+                    return ("Понедельник");
+                case 1:
+                    return ("Вторник");
+                case 2:
+                    return ("Среда");
+                case 3:
+                    return ("Четверг");
+                case 4:
+                    return ("Пятница");
+                default:
+                    return (null);
+            }
+        }
+
+
+            public static void New_Day(string day) 
         {
             switch (day) 
             {
                 case "пн":
                     den_nedeli = "Понедельник";
+                    MessageBox.Show("пон");
                     break;
                 case "вт":
                     den_nedeli = "Вторник";
@@ -124,7 +147,6 @@ namespace Politeh_Parser.Classes
                     break;
                 case "пт":
                     den_nedeli = "Пятница";
-                    MessageBox.Show("Пятница");
                     break;
 
             }
