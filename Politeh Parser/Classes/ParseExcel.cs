@@ -5,11 +5,11 @@ using System.Windows.Forms;
 //using Microsoft.Office.Interop.Excel;
 //using _Excel = Microsoft.Office.Interop.Excel;
 
-namespace Politeh_Parser.Classes
+namespace Politesh_parsing_net_core.Classes
 {
     internal class ParseExcel
     {
-        public static void Load_excel_file(string file) 
+        public static void Load_excel_file(string file)
         {
 
             Group group = new Group
@@ -23,49 +23,49 @@ namespace Politeh_Parser.Classes
                 "",
                  0
             );
-             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-             
-             string[] massive_days = new string[] { "пн", "вт", "ср", "чт", "пт" };;
-             foreach (string day in massive_days)
-             {
-                 JsonBuild.New_Day(day);
-                 Days_processing(group, file, day);
-                 
-             }
-             
-            
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+
+            string[] massive_days = new string[] { "пн", "вт", "ср", "чт", "пт" }; ;
+            foreach (string day in massive_days)
+            {
+                JsonBuild.New_Day(day);
+                Days_processing(group, file, day);
+
+            }
+
+
         }
 
-        private static void Days_processing(Group group, string file,string day) 
+        private static void Days_processing(Group group, string file, string day)
         {
             using (var package = new ExcelPackage(new FileInfo(file)))
             {
-                int Num1, Num2 ,Num3,max_count_pars;
+                int Num1, Num2, Num3, max_count_pars;
                 if (day == "пн")
                 {
                     Num1 = 2; Num2 = 13; Num3 = 30; max_count_pars = 7;
                 }
-                else 
+                else
                 {
-                    Num1 = 1; Num2 = 12; Num3 = 26;max_count_pars = 6;
+                    Num1 = 1; Num2 = 12; Num3 = 26; max_count_pars = 6;
                 }
                 string text_from_the_cell = "";
                 int counter = 0;
                 var ws = package.Workbook.Worksheets[day];
-   
-                for (int i = Num1; i < Num2; i++) 
+
+                for (int i = Num1; i < Num2; i++)
                 {
-                    for (int j = 3; j <= Num3; j++) 
+                    for (int j = 3; j <= Num3; j++)
                     {
-                        if (ws.Cells[j, i].Value != null) 
+                        if (ws.Cells[j, i].Value != null)
                         {
                             if (ws.Cells[j, i].Value.ToString().Length > 2)
                             {
-                                if(counter !=0)
+                                if (counter != 0)
                                     group.Count_par++;
                                 text_from_the_cell = ws.Cells[j, i].Value.ToString();
                             }
-                            else 
+                            else
                             {
                                 text_from_the_cell = "None";
                             }
@@ -80,12 +80,12 @@ namespace Politeh_Parser.Classes
                         {
                             group = Monday(group, counter, text_from_the_cell);
                         }
-                        else 
+                        else
                         {
                             group = Other_day(group, counter, text_from_the_cell);
                         }
                         counter++;
-                        if (counter == max_count_pars) 
+                        if (counter == max_count_pars)
                         {
                             JsonBuild.JsonBuilder(group);
                             group.Count_par = 0;
@@ -93,12 +93,12 @@ namespace Politeh_Parser.Classes
                         }
                     }
                 }
-                
+
             }
         }
-        private static Group Monday(Group group,int couter,string text) 
+        private static Group Monday(Group group, int couter, string text)
         {
-            switch (couter) 
+            switch (couter)
             {
                 case 0:
                     group.Group_name = text;
@@ -174,5 +174,5 @@ namespace Politeh_Parser.Classes
             Fourth_para = fourth_para;
             Fifth_para = fifth_para;
         }
-    } 
+    }
 }
