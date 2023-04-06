@@ -31,6 +31,7 @@
             this.Load_EXCEL = new System.Windows.Forms.Button();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.File_Name_in_Form = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // Load_EXCEL
@@ -56,11 +57,20 @@
             this.File_Name_in_Form.TabIndex = 1;
             this.File_Name_in_Form.Text = "label1";
             // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(295, 14);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(480, 422);
+            this.textBox1.TabIndex = 2;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.File_Name_in_Form);
             this.Controls.Add(this.Load_EXCEL);
             this.Name = "Form1";
@@ -75,5 +85,6 @@
         private Button Load_EXCEL;
         private OpenFileDialog openFileDialog1;
         private Label File_Name_in_Form;
+        private TextBox textBox1;
     }
 }

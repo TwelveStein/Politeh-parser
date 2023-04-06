@@ -30,8 +30,9 @@ namespace Politesh_parsing_net_core.Classes
             {
                 JsonBuild.New_Day(day);
                 Days_processing(group, file, day);
-
+                JsonBuild.Finish_build();
             }
+
 
 
         }
