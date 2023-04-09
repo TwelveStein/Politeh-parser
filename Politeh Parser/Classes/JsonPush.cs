@@ -23,6 +23,7 @@ namespace Politesh_parsing_net_core.Classes
                     //Write a second line of text
                     //Close the file
                     sw.Close();
+                    MessageBox.Show("Успешно");
                 }
                 catch 
                 {
